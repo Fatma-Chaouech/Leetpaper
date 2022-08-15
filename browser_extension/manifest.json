@@ -1,0 +1,44 @@
+{
+    "manifest_version": 2,
+    "name": "Leetpaper",
+    "version": "1.0",
+    "description": "Bookmarking service that allows web content to be saved so it can be 'read later' on a phone. ",
+    "icons": {
+    "96": "icons/small_icon.png"
+    },
+
+    "permissions": [
+        "storage",
+        "activeTab",
+        "contextMenus",
+        "http://*/*",
+        "https://*/*"
+    ],
+
+    "browser_action": {
+    "default_icon": "icons/small_icon.png",
+    "default_title": "Paper Saver"
+    },
+
+    "background": {
+        "scripts": ["./readlater.js"]
+    },
+
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "./bookmarklet.js"
+            ],
+            "css": [
+                "leetpaper.css"
+            ],
+            "run_at": "document_start"
+        }
+    ]
+    
+
+}
