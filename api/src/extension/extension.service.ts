@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosError } from 'axios';
 import { JSDOM } from 'jsdom';
+import { PaperService } from 'src/paper/paper.service';
 
 @Injectable()
 export class ExtensionService {
 
-    constructor() {}
+    //inject PaperService in the constructor
+    constructor(private readonly paperService: PaperService) {}
     async fetchFromWeb(url: string) {
         const HTMLData = axios
             .get(url)
@@ -38,7 +40,9 @@ export class ExtensionService {
 
     async addPaper(body: any){
         // adds the paper to the database
-        return true;
+        const url = body.u;
+        const text = body.b;
+        return this.paperService.addPaper(url, text);
     }
 
     async movePaper(body: any, bookmark_id: string, folder_id: string){

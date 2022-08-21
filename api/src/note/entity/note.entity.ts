@@ -1,16 +1,20 @@
 import { PaperEntity } from 'src/paper/entities/paper.entity';
-import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('note')
 export class NoteEntity  {
-    @PrimaryColumn({ type: 'text'})
-    highlighted_text: string;
 
-    @Column({type: 'text'})
+    @PrimaryGeneratedColumn({type: 'int'})
+    noteId: number;
+
+    @Column({ type: 'varchar'})
+    highlightedText: string;
+
+    @Column('text')
     note: string;
-    
+    /*
     @PrimaryColumn()
-    @ManyToOne(() => PaperEntity, paper => paper.notes)
+    @ManyToOne((type) => PaperEntity, paper => paper.paperId)
     paper: PaperEntity;
-    
+    */
 }

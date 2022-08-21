@@ -1,16 +1,21 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { PaperService } from 'src/paper/paper.service';
 import { ExtensionService } from './extension.service';
 
 @Controller('')
 export class ExtensionController {
 
-    constructor(private readonly extensionService: ExtensionService) {}
+    constructor(private readonly extensionService: ExtensionService,
+        private readonly paperService: PaperService
+        ) {}
 
 
     // 2 : adds the paper to the database
     @Post('bookmarklet/post_v5') 
     async addPaper(@Body() body: any) {
         console.log("Trying to add the paper");
+        console.log("the body is ", body);
+        
         return this.extensionService.addPaper(body);
     }   
 
@@ -29,5 +34,11 @@ export class ExtensionController {
 
     }
 
+    @Get("/bookmarklet/paper")
+    async getPaper(@Query() query : { id : number }){
+        const paper = await this.paperService.findOne(query.id);
+        console.log(paper);
+        return paper;
+        }
     
 }

@@ -8,4 +8,5 @@ export class LinkEntity  {
 
     @ManyToMany(() => PaperEntity, paper => paper.url)
     papers: PaperEntity[];
+    
 }
