@@ -386,7 +386,8 @@ function jbs(html)
 }
 
 function jbs_deflate(html) {
-    return Base64.convertUTF8StringToBase64(RawDeflate.deflate(unescape(encodeURIComponent(html))));
+    //return Base64.convertUTF8StringToBase64(RawDeflate.deflate(unescape(encodeURIComponent(html))));
+    return Base64.convertUTF8StringToBase64(unescape(encodeURIComponent(html)));
 };
 
 
